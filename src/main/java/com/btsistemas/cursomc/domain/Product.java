@@ -1,6 +1,7 @@
 package com.btsistemas.cursomc.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,10 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+/**
+ *
+ * @author ben
+ */
 @Entity
-public class Category implements Serializable {
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,17 +26,19 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
+    private BigDecimal price;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Product> products = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories = new ArrayList<>();
 
-    public Category() {
-
+    public Product() {
     }
 
-    public Category(Integer id, String description) {
+    public Product(Integer id, String description, BigDecimal price) {
         this.id = id;
         this.description = description;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -48,18 +57,26 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -74,7 +91,7 @@ public class Category implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Category other = (Category) obj;
+        final Product other = (Product) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
