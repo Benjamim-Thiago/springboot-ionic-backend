@@ -1,11 +1,16 @@
 package com.btsistemas.cursomc;
 
+import com.btsistemas.cursomc.domain.Address;
 import com.btsistemas.cursomc.domain.Category;
 import com.btsistemas.cursomc.domain.City;
+import com.btsistemas.cursomc.domain.Client;
 import com.btsistemas.cursomc.domain.Product;
 import com.btsistemas.cursomc.domain.State;
+import com.btsistemas.cursomc.domain.enums.TypeClient;
+import com.btsistemas.cursomc.repositories.AddressRepository;
 import com.btsistemas.cursomc.repositories.CategoryRepository;
 import com.btsistemas.cursomc.repositories.CityRepository;
+import com.btsistemas.cursomc.repositories.ClientRepository;
 import com.btsistemas.cursomc.repositories.ProductRepository;
 import com.btsistemas.cursomc.repositories.StateRepository;
 import java.math.BigDecimal;
@@ -26,6 +31,10 @@ public class CursomcApplication implements CommandLineRunner {
     private StateRepository stateRepository;
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
@@ -72,5 +81,18 @@ public class CursomcApplication implements CommandLineRunner {
         stateRepository.saveAll(Arrays.asList(state1, state2, state3));
         cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5));
 
+        //Client & Phones & Address
+        
+        Client cli1 = new Client(null, "Carolina Alana Sônia Monteiro", "ccarolinaalanasoniamonteiro@lucaslima.com", "36180027692", TypeClient.PESSOAFISICA);
+       
+        cli1.getPhones().addAll(Arrays.asList("9225163444", "92981905512"));
+        
+        Address address1 =  new Address(null , "Rua José Luis Fortes", "4888", "proximo ao Hospital do mocambinho", "Mocambinho", "64010760", cli1, city1);
+        Address address2 =  new Address(null , "Avenida Campos Sales", "1268", "proximo a Academia Demostenes Ribeiro", "Centro", "64010300", cli1, city1);
+   
+        cli1.getAddresses().addAll(Arrays.asList(address1, address2));
+        
+        clientRepository.saveAll(Arrays.asList(cli1));
+        addressRepository.saveAll(Arrays.asList(address1, address2));
     }
 }
