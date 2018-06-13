@@ -84,7 +84,7 @@ public class CursomcApplication implements CommandLineRunner {
         //Client & Phones & Address
         
         Client cli1 = new Client(null, "Carolina Alana Sônia Monteiro", "ccarolinaalanasoniamonteiro@lucaslima.com", "36180027692", TypeClient.PESSOAFISICA);
-       
+        
         cli1.getPhones().addAll(Arrays.asList("9225163444", "92981905512"));
         
         Address address1 =  new Address(null , "Rua José Luis Fortes", "4888", "proximo ao Hospital do mocambinho", "Mocambinho", "64010760", cli1, city1);
@@ -92,7 +92,18 @@ public class CursomcApplication implements CommandLineRunner {
    
         cli1.getAddresses().addAll(Arrays.asList(address1, address2));
         
-        clientRepository.saveAll(Arrays.asList(cli1));
-        addressRepository.saveAll(Arrays.asList(address1, address2));
+        
+        Client cli2 = new Client(null, "Jose Felismino", "felismino@gmail.com", "31234567692", TypeClient.PESSOAFISICA);
+        
+        cli2.getPhones().addAll(Arrays.asList("9221113444", "92222205512"));
+        
+        Address address3 =  new Address(null , "Rua Jão Firmino", "4008", "proximidade a Helena modal", "Piraguitin", "6400000", cli2, city1);
+        Address address4 =  new Address(null , "Avenida Marechal", "1268", "", "Primavera", "64010300", cli2, city1);
+   
+        cli2.getAddresses().addAll(Arrays.asList(address3, address4));
+        
+        
+        clientRepository.saveAll(Arrays.asList(cli1, cli2));
+        addressRepository.saveAll(Arrays.asList(address1, address2, address3, address4));
     }
 }

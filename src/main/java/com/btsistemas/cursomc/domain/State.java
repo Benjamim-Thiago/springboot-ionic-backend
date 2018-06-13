@@ -5,6 +5,7 @@
  */
 package com.btsistemas.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class State implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
+    
+    @JsonBackReference
     @OneToMany(mappedBy = "state")
     private List<City> cities = new ArrayList<>();
 

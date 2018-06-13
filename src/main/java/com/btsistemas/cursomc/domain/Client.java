@@ -2,6 +2,7 @@
 package com.btsistemas.cursomc.domain;
 
 import com.btsistemas.cursomc.domain.enums.TypeClient;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,6 +34,7 @@ public class Client implements Serializable {
     private String document;
     private Integer typeClient;
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address>addresses =  new ArrayList<>();
     
