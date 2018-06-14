@@ -9,14 +9,15 @@ package com.btsistemas.cursomc.domain.enums;
  *
  * @author ben
  */
-public enum TypeClient {
-    PHYSICALPERSON(1, "Pessoa Física"),
-    JURIDICALPERSON(2, "Pessoa Jurídica");
+public enum PaymentStatus {
+    PENDING(1, "Pendente"),
+    SETTLED(2, "Quitado"),
+    CANCELED(3, "Cancelado");
 
     private int code;
     private String description;
 
-    private TypeClient(int code, String description) {
+    private PaymentStatus(int code, String description) {
         this.code = code;
         this.description = description;
     }
@@ -29,20 +30,18 @@ public enum TypeClient {
         return description;
     }
 
-    
-
-    public static TypeClient toEnum(Integer code) {
+    public static PaymentStatus toEnum(Integer code) {
 
         if (code == null) {
             return null;
         }
 
-        for (TypeClient x : TypeClient.values()) {
+        for (PaymentStatus x : PaymentStatus.values()) {
             if (code.equals(x.getCode())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Código tipo pessoa inválido: " + code);
+        throw new IllegalArgumentException("Código tipo de pagamento inválido: " + code);
     }
 }

@@ -1,4 +1,3 @@
-
 package com.btsistemas.cursomc.domain;
 
 import com.btsistemas.cursomc.domain.enums.TypeClient;
@@ -33,14 +32,17 @@ public class Client implements Serializable {
     private String email;
     private String document;
     private Integer typeClient;
-    
+
     @JsonManagedReference
     @OneToMany(mappedBy = "client")
-    private List<Address>addresses =  new ArrayList<>();
-    
+    private List<Address> addresses = new ArrayList<>();
+
     @ElementCollection
     @CollectionTable(name = "phones")
     private Set<String> phones = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    private List<RequestSale> requestSales = new ArrayList<>();
 
     public Client() {
     }
@@ -109,6 +111,14 @@ public class Client implements Serializable {
         this.phones = phones;
     }
 
+    public List<RequestSale> getRequestSales() {
+        return requestSales;
+    }
+
+    public void setRequestSales(List<RequestSale> requestSales) {
+        this.requestSales = requestSales;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -133,6 +143,5 @@ public class Client implements Serializable {
         }
         return true;
     }
-    
-    
+
 }
