@@ -4,6 +4,7 @@ import com.btsistemas.cursomc.domain.Address;
 import com.btsistemas.cursomc.domain.Category;
 import com.btsistemas.cursomc.domain.City;
 import com.btsistemas.cursomc.domain.Client;
+import com.btsistemas.cursomc.domain.ItemRequestSale;
 import com.btsistemas.cursomc.domain.Payment;
 import com.btsistemas.cursomc.domain.PaymentWithCard;
 import com.btsistemas.cursomc.domain.PaymentWithTicket;
@@ -16,6 +17,7 @@ import com.btsistemas.cursomc.repositories.AddressRepository;
 import com.btsistemas.cursomc.repositories.CategoryRepository;
 import com.btsistemas.cursomc.repositories.CityRepository;
 import com.btsistemas.cursomc.repositories.ClientRepository;
+import com.btsistemas.cursomc.repositories.ItemRequestSaleRepository;
 import com.btsistemas.cursomc.repositories.PaymentRepository;
 import com.btsistemas.cursomc.repositories.ProductRepository;
 import com.btsistemas.cursomc.repositories.RequestSaleRepository;
@@ -47,6 +49,8 @@ public class CursomcApplication implements CommandLineRunner {
     private RequestSaleRepository requestSaleRepository;
     @Autowired
     private PaymentRepository paymentRepository;
+    @Autowired
+    private ItemRequestSaleRepository itemRequestSaleRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
@@ -59,19 +63,19 @@ public class CursomcApplication implements CommandLineRunner {
         Category cat1 = new Category(null, "Informática");
         Category cat2 = new Category(null, "Escritório");
 
-        Product p1 = new Product(null, "Computador", new BigDecimal("2400.35"));
-        Product p2 = new Product(null, "Impressora", new BigDecimal("840.55"));
-        Product p3 = new Product(null, "Mouser", new BigDecimal("30.65"));
+        Product product1 = new Product(null, "Computador", new BigDecimal("2400.35"));
+        Product product2 = new Product(null, "Impressora", new BigDecimal("840.55"));
+        Product product3 = new Product(null, "Mouser", new BigDecimal("30.65"));
 
-        cat1.getProducts().addAll(Arrays.asList(p1, p2, p3));
-        cat2.getProducts().addAll(Arrays.asList(p2));
+        cat1.getProducts().addAll(Arrays.asList(product1, product2, product3));
+        cat2.getProducts().addAll(Arrays.asList(product2));
 
-        p1.getCategories().addAll(Arrays.asList(cat1));
-        p2.getCategories().addAll(Arrays.asList(cat1, cat2));
-        p3.getCategories().addAll(Arrays.asList(cat1));
+        product1.getCategories().addAll(Arrays.asList(cat1));
+        product2.getCategories().addAll(Arrays.asList(cat1, cat2));
+        product3.getCategories().addAll(Arrays.asList(cat1));
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
-        productRepository.saveAll(Arrays.asList(p1, p2, p3));
+        productRepository.saveAll(Arrays.asList(product1, product2, product3));
 
         //Cidade Estado
         State state1 = new State(null, "Piauí");
@@ -133,6 +137,17 @@ public class CursomcApplication implements CommandLineRunner {
         requestSaleRepository.saveAll(Arrays.asList(requestSale1, requestSale2));
         paymentRepository.saveAll(Arrays.asList(pg1, pg2));
         
+        ItemRequestSale itemRequestSale1 = new ItemRequestSale(requestSale1, product1, 0.00, 1, product1.getPrice());
+        ItemRequestSale itemRequestSale2 = new ItemRequestSale(requestSale1, product3, 0.00, 1, product3.getPrice());
+        ItemRequestSale itemRequestSale3 = new ItemRequestSale(requestSale2, product2, 100.00, 1, product2.getPrice());
         
+        requestSale1.getItems().addAll(Arrays.asList(itemRequestSale1, itemRequestSale2));
+        requestSale2.getItems().addAll(Arrays.asList(itemRequestSale3));
+        
+        product1.getItems().addAll(Arrays.asList(itemRequestSale1));
+        product2.getItems().addAll(Arrays.asList(itemRequestSale3));
+        product3.getItems().addAll(Arrays.asList(itemRequestSale2));
+        
+        itemRequestSaleRepository.saveAll(Arrays.asList(itemRequestSale1, itemRequestSale2, itemRequestSale3));
     }
 }

@@ -2,7 +2,9 @@ package com.btsistemas.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -28,14 +31,17 @@ public class RequestSale implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "requestSale")
     private Payment payment;
-    
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-    
+
     @ManyToOne
     @JoinColumn(name = "address_delivery_id")
     private Address addressDelivery;
+
+    @OneToMany(mappedBy = "id.requestSale")
+    private Set<ItemRequestSale> items = new HashSet<>();
 
     public RequestSale() {
     }
@@ -85,6 +91,14 @@ public class RequestSale implements Serializable {
 
     public void setAddressDelivery(Address addressDelivery) {
         this.addressDelivery = addressDelivery;
+    }
+
+    public Set<ItemRequestSale> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<ItemRequestSale> items) {
+        this.items = items;
     }
 
     @Override
