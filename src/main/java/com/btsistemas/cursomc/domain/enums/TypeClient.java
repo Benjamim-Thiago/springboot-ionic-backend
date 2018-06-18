@@ -10,8 +10,8 @@ package com.btsistemas.cursomc.domain.enums;
  * @author ben
  */
 public enum TypeClient {
-    PHYSICALPERSON(1, "Pessoa Física"),
-    JURIDICALPERSON(2, "Pessoa Jurídica");
+    PESSOA_FISICA(1, "Physical Person"),
+    PESSOA_JURÍDICA(2, "Juridic Person");
 
     private int code;
     private String description;

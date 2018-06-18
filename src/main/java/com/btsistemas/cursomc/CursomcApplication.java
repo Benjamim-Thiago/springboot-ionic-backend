@@ -98,7 +98,7 @@ public class CursomcApplication implements CommandLineRunner {
         cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5));
 
         //Client & Phones & Address
-        Client cli1 = new Client(null, "Carolina Alana Sônia Monteiro", "ccarolinaalanasoniamonteiro@lucaslima.com", "36180027692", TypeClient.PHYSICALPERSON);
+        Client cli1 = new Client(null, "Carolina Alana Sônia Monteiro", "ccarolinaalanasoniamonteiro@lucaslima.com", "36180027692", TypeClient.PESSOA_FISICA);
 
         cli1.getPhones().addAll(Arrays.asList("9225163444", "92981905512"));
 
@@ -107,7 +107,7 @@ public class CursomcApplication implements CommandLineRunner {
 
         cli1.getAddresses().addAll(Arrays.asList(address1, address2));
 
-        Client cli2 = new Client(null, "Jose Felismino", "felismino@gmail.com", "31234567692", TypeClient.PHYSICALPERSON);
+        Client cli2 = new Client(null, "Jose Felismino", "felismino@gmail.com", "31234567692", TypeClient.PESSOA_FISICA);
 
         cli2.getPhones().addAll(Arrays.asList("9221113444", "92222205512"));
 
@@ -126,10 +126,10 @@ public class CursomcApplication implements CommandLineRunner {
         RequestSale requestSale1 = new RequestSale(null, date.parse("14/05/2018 22:20"), cli1, address1);
         RequestSale requestSale2 = new RequestSale(null, date.parse("14/05/2018 01:09"), cli1, address2);
         
-        Payment pg1  = new PaymentWithCard(null, PaymentStatus.SETTLED, requestSale1, 6);
+        Payment pg1  = new PaymentWithCard(null, PaymentStatus.QUITADO, requestSale1, 6);
         requestSale1.setPayment(pg1);
         
-        Payment pg2  = new PaymentWithTicket(null, PaymentStatus.PENDING, requestSale2, date.parse("18/06/2018 00:00"), null);
+        Payment pg2  = new PaymentWithTicket(null, PaymentStatus.ABERTO, requestSale2, date.parse("18/06/2018 00:00"), null);
         requestSale2.setPayment(pg2);
         
         cli1.getRequestSales().addAll(Arrays.asList(requestSale1, requestSale2));

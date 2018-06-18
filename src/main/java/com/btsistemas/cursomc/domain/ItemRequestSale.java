@@ -1,5 +1,6 @@
 package com.btsistemas.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class ItemRequestSale implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     ItemRequestSalePK id = new ItemRequestSalePK();
 
@@ -33,6 +35,7 @@ public class ItemRequestSale implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public RequestSale getRequestSale() {
         return id.getRequestSale();
     }

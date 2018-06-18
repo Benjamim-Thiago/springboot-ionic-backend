@@ -1,6 +1,7 @@
 package com.btsistemas.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,15 +38,17 @@ public class Product implements Serializable {
     @JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<ItemRequestSale> items = new HashSet<>();
 
+    @JsonIgnore
     public List<RequestSale> getRequestSales() {
-        List<RequestSale> lista = new ArrayList<>();
+        List<RequestSale> list = new ArrayList<>();
         for (ItemRequestSale x : items) {
-            lista.add(x.getRequestSale());
+            list.add(x.getRequestSale());
         }
-        return lista;
+        return list;
     }
 
     public Product() {
