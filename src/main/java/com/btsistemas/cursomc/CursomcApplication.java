@@ -102,8 +102,8 @@ public class CursomcApplication implements CommandLineRunner {
 
         cli1.getPhones().addAll(Arrays.asList("9225163444", "92981905512"));
 
-        Address address1 = new Address(null, "Rua José Luis Fortes", "4888", "proximo ao Hospital do mocambinho", "Mocambinho", "64010760", cli1, city1);
-        Address address2 = new Address(null, "Avenida Campos Sales", "1268", "proximo a Academia Demostenes Ribeiro", "Centro", "64010300", cli1, city1);
+        Address address1 = new Address(null, "Rua José Francisco Nunes", "1344", "", "Mocambinho", "64010750", cli1, city1);
+        Address address2 = new Address(null, "Avenida Sales Monte", "322", "proximo a Academia D.M.X", "Centro", "64010400", cli1, city1);
 
         cli1.getAddresses().addAll(Arrays.asList(address1, address2));
 
