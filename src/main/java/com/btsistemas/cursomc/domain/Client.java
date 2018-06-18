@@ -1,8 +1,7 @@
 package com.btsistemas.cursomc.domain;
 
 import com.btsistemas.cursomc.domain.enums.TypeClient;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,7 +33,6 @@ public class Client implements Serializable {
     private String document;
     private Integer typeClient;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
@@ -42,7 +40,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "phones")
     private Set<String> phones = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<RequestSale> requestSales = new ArrayList<>();
 

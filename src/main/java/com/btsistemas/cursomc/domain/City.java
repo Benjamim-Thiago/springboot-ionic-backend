@@ -5,7 +5,6 @@
  */
 package com.btsistemas.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -29,7 +28,6 @@ public class City implements Serializable {
     private Integer id;
     private String description;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;

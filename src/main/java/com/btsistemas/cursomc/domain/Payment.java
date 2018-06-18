@@ -6,7 +6,7 @@
 package com.btsistemas.cursomc.domain;
 
 import com.btsistemas.cursomc.domain.enums.PaymentStatus;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Inheritance;
 import java.util.Objects;
@@ -31,7 +31,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
     private Integer status;
     
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "request_sale_id")
     @MapsId
