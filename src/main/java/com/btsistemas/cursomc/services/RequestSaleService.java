@@ -15,7 +15,7 @@ public class RequestSaleService {
     @Autowired
     private RequestSaleRepository repo;
 
-    public RequestSale search(Integer id) {
+    public RequestSale find(Integer id) {
         Optional<RequestSale> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + RequestSale.class.getName()));
