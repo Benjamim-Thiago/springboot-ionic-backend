@@ -4,6 +4,7 @@ import com.btsistemas.cursomc.domain.Category;
 import com.btsistemas.cursomc.repositories.CategoryRepository;
 import com.btsistemas.cursomc.services.exceptions.DataIntegrityException;
 import com.btsistemas.cursomc.services.exceptions.ObjectNotFoundException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,9 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repo;
 
+    public List<Category> all(){
+        return repo.findAll();
+    }
     public Category find(Integer id) {
         Optional<Category> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
