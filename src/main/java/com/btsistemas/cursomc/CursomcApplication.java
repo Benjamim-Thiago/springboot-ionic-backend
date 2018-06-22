@@ -62,6 +62,18 @@ public class CursomcApplication implements CommandLineRunner {
 
         Category cat1 = new Category(null, "Informática");
         Category cat2 = new Category(null, "Escritório");
+        Category cat3 = new Category(null, "Cama Mesa & Banho");
+        Category cat4 = new Category(null, "Eletrônicos");
+        Category cat5 = new Category(null, "Jardinagem");
+        Category cat6 = new Category(null, "Decoração");
+        Category cat7 = new Category(null, "Perfumaria");
+        Category cat8 = new Category(null, "Moveis");
+        Category cat9 = new Category(null, "Brinquedo");
+        Category cat10 = new Category(null, "Esporte & Lazer");
+        Category cat11 = new Category(null, "Bebe");
+        Category cat12 = new Category(null, "Suplemento & Vitamina");
+        Category cat13 = new Category(null, "Construção");
+        Category cat14 = new Category(null, "Musica");
 
         Product product1 = new Product(null, "Computador", new BigDecimal("2400.35"));
         Product product2 = new Product(null, "Impressora", new BigDecimal("840.55"));
@@ -74,7 +86,7 @@ public class CursomcApplication implements CommandLineRunner {
         product2.getCategories().addAll(Arrays.asList(cat1, cat2));
         product3.getCategories().addAll(Arrays.asList(cat1));
 
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12, cat13, cat14));
         productRepository.saveAll(Arrays.asList(product1, product2, product3));
 
         //Cidade Estado
