@@ -1,6 +1,7 @@
 package com.btsistemas.cursomc.services;
 
 import com.btsistemas.cursomc.domain.Category;
+import com.btsistemas.cursomc.dto.CategoryDTO;
 import com.btsistemas.cursomc.repositories.CategoryRepository;
 import com.btsistemas.cursomc.services.exceptions.DataIntegrityException;
 import com.btsistemas.cursomc.services.exceptions.ObjectNotFoundException;
@@ -55,5 +56,8 @@ public class CategoryService {
                 orderBy);
         return repo.findAll(pageRequest);
     }
-
+    
+    public Category toDtoForCategory(CategoryDTO categoryDTO){
+        return new Category(categoryDTO.getId(), categoryDTO.getDescription());
+    }
 }

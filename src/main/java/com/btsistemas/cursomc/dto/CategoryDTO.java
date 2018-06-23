@@ -2,6 +2,8 @@ package com.btsistemas.cursomc.dto;
 
 import com.btsistemas.cursomc.domain.Category;
 import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -12,6 +14,9 @@ public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+
+    @NotEmpty(message = "Preencimento obrigatorio.")
+    @Length(min = 5, max = 80, message = "Deve conter entre 5 a 80 caracteres.")
     private String description;
 
     public CategoryDTO() {
