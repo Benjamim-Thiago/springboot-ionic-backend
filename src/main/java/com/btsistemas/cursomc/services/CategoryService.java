@@ -17,47 +17,46 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository repo;
+	@Autowired
+	private CategoryRepository repo;
 
-    public List<Category> all() {
-        return repo.findAll();
-    }
+	public List<Category> all() {
+		return repo.findAll();
+	}
 
-    public Category find(Integer id) {
-        Optional<Category> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado! Id: " + id + ", Tipo: " + Category.class.getName()));
+	public Category find(Integer id) {
+		Optional<Category> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Category.class.getName()));
 
-    }
+	}
 
-    public Category insert(Category obj) {
-        obj.setId(null);
-        return repo.save(obj);
-    }
+	public Category insert(Category obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 
-    public Category update(Category obj) {
-        find(obj.getId());
-        return repo.save(obj);
-    }
+	public Category update(Category obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 
-    public void delete(Integer id) {
-        find(id);
-        try {
-            repo.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possivel excluir uma categoria que tenha produtos");
-        }
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que tenha produtos");
+		}
 
-    }
+	}
 
-    public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
-                orderBy);
-        return repo.findAll(pageRequest);
-    }
-    
-    public Category toDtoForCategory(CategoryDTO categoryDTO){
-        return new Category(categoryDTO.getId(), categoryDTO.getDescription());
-    }
+	public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+	}
+
+	public Category toDtoForCategory(CategoryDTO categoryDTO) {
+		return new Category(categoryDTO.getId(), categoryDTO.getDescription());
+	}
 }
