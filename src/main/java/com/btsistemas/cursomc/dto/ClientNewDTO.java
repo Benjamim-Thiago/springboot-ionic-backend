@@ -2,32 +2,51 @@ package com.btsistemas.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class ClientNewDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-	
-    //Client (Domain)
+	private static final long serialVersionUID = 1L;
+
+	// Client (Domain)
+	@NotEmpty(message = "Preencimento obrigatorio.")
+	@Length(min = 5, max = 120, message = "Deve conter entre 5 a 120 caracteres.")
 	private String name;
+
+	@NotEmpty(message = "Preencimento obrigatorio.")
+	@Email(message = "E-mail inválido.")
 	private String email;
+		
+	@NotEmpty(message = "Preencimento obrigatorio.")
 	private String document;
-	private Integer typeClient;
 	
-	//Address (Domain)
+	private Integer typeClient;
+
+	// Address (Domain)
+	@NotEmpty(message = "Preencimento obrigatorio.")
 	private String place;
-    private String number;
-    private String Complement;
-    private String neighborhood;
-    private String zipcode;
-    
-    private String phone1;
-    private String phone2;
-    private String phone3;
- 
-    private Integer cityId;
-    
-    public ClientNewDTO() {
-    	
-    }
+	
+	@NotEmpty(message = "Preencimento obrigatorio.")
+	private String number;
+	private String Complement;
+	private String neighborhood;
+	
+	@NotEmpty(message = "Preencimento obrigatorio.")
+	private String zipcode;
+
+	@NotEmpty(message = "Preencimento obrigatorio.")
+	private String phone1;
+	private String phone2;
+	private String phone3;
+
+	private Integer cityId;
+
+	public ClientNewDTO() {
+
+	}
 
 	public String getName() {
 		return name;
@@ -132,5 +151,5 @@ public class ClientNewDTO implements Serializable {
 	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
 	}
-   	
+
 }
