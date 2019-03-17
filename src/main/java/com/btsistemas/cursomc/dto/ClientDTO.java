@@ -2,22 +2,26 @@ package com.btsistemas.cursomc.dto;
 
 import java.io.Serializable;
 
+
 import com.btsistemas.cursomc.domain.Client;
+import com.btsistemas.cursomc.services.validation.ClientUpdate;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+@ClientUpdate
 public class ClientDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	
+
 	@NotEmpty(message = "Preencimento obrigatorio.")
 	@Length(min = 5, max = 120, message = "Deve conter entre 5 a 120 caracteres.")
 	private String name;
-	
+
 	@NotEmpty(message = "Preencimento obrigatorio.")
 	@Email(message = "E-mail inválido.")
 	private String email;

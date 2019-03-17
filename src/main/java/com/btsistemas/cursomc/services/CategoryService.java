@@ -1,18 +1,20 @@
 package com.btsistemas.cursomc.services;
 
-import com.btsistemas.cursomc.domain.Category;
-import com.btsistemas.cursomc.dto.CategoryDTO;
-import com.btsistemas.cursomc.repositories.CategoryRepository;
-import com.btsistemas.cursomc.services.exceptions.DataIntegrityException;
-import com.btsistemas.cursomc.services.exceptions.ObjectNotFoundException;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+
+import com.btsistemas.cursomc.domain.Category;
+import com.btsistemas.cursomc.dto.CategoryDTO;
+import com.btsistemas.cursomc.repositories.CategoryRepository;
+import com.btsistemas.cursomc.services.exceptions.DataIntegrityException;
+import com.btsistemas.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoryService {

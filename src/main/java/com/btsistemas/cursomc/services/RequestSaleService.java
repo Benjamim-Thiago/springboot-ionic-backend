@@ -1,12 +1,13 @@
 package com.btsistemas.cursomc.services;
 
-import com.btsistemas.cursomc.domain.Category;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.btsistemas.cursomc.domain.RequestSale;
 import com.btsistemas.cursomc.repositories.RequestSaleRepository;
 import com.btsistemas.cursomc.services.exceptions.ObjectNotFoundException;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 
 @Service
