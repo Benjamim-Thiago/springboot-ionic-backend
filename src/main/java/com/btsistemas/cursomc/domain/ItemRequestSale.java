@@ -35,6 +35,11 @@ public class ItemRequestSale implements Serializable {
         this.price = price;
     }
 
+
+    public BigDecimal getSubTotal() {
+    	return (price.subtract(new BigDecimal(discount))).multiply(new BigDecimal(amount)); 
+    }
+    
     @JsonIgnore
     public RequestSale getRequestSale() {
         return id.getRequestSale();

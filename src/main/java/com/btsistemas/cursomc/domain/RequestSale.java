@@ -2,6 +2,7 @@ package com.btsistemas.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -55,6 +56,14 @@ public class RequestSale implements Serializable {
         this.addressDelivery = addressDelivery;
     }
 
+    public BigDecimal getValueTotal() {
+    	 BigDecimal addValue = new BigDecimal("0.00");
+    	 for (ItemRequestSale irs : items) {
+    		 addValue = addValue.add(irs.getSubTotal());
+    	 }
+    	 return addValue;
+    }
+    
     public Integer getId() {
         return id;
     }
