@@ -10,7 +10,7 @@ package com.btsistemas.cursomc.domain.enums;
  * @author ben
  */
 public enum PaymentStatus {
-    ABERTO(1, "Pending"),
+    PENDENTE(1, "Pending"),
     QUITADO(2, "settled"),
     CANCELADO(3, "canceled");
 

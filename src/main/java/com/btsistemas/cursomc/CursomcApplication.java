@@ -167,7 +167,7 @@ public class CursomcApplication implements CommandLineRunner {
 		Payment pg1 = new PaymentWithCard(null, PaymentStatus.QUITADO, requestSale1, 6);
 		requestSale1.setPayment(pg1);
 
-		Payment pg2 = new PaymentWithTicket(null, PaymentStatus.ABERTO, requestSale2, date.parse("18/06/2018 00:00"),
+		Payment pg2 = new PaymentWithTicket(null, PaymentStatus.PENDENTE, requestSale2, date.parse("18/06/2018 00:00"),
 				null);
 		requestSale2.setPayment(pg2);
 

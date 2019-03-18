@@ -44,9 +44,16 @@ public class ItemRequestSale implements Serializable {
     public RequestSale getRequestSale() {
         return id.getRequestSale();
     }
+    
+    public void setRequestSale(RequestSale requestSale) {
+    	id.setRequestSale(requestSale);
+    }
 
     public Product getProduct() {
         return id.getProduct();
+    }
+    public void setProduct(Product product) {
+		id.setProduct(product);
     }
 
     public ItemRequestSalePK getId() {

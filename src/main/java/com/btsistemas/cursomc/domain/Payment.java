@@ -7,6 +7,8 @@ package com.btsistemas.cursomc.domain;
 
 import com.btsistemas.cursomc.domain.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.io.Serializable;
 import javax.persistence.Inheritance;
 import java.util.Objects;
@@ -23,6 +25,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
