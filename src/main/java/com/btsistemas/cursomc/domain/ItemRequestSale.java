@@ -3,6 +3,8 @@ package com.btsistemas.cursomc.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,104 +16,119 @@ import javax.persistence.Entity;
 @Entity
 public class ItemRequestSale implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @JsonIgnore
-    @EmbeddedId
-    ItemRequestSalePK id = new ItemRequestSalePK();
+	@JsonIgnore
+	@EmbeddedId
+	ItemRequestSalePK id = new ItemRequestSalePK();
 
-    private Double discount;
-    private Integer amount;
-    private BigDecimal price;
+	private Double discount;
+	private Integer amount;
+	private BigDecimal price;
 
-    public ItemRequestSale() {
-    }
+	public ItemRequestSale() {
+	}
 
-    public ItemRequestSale(RequestSale requestSale, Product product, Double discount, Integer amount, BigDecimal price) {
-        id.setRequestSale(requestSale);
-        id.setProduct(product);
-        this.discount = discount;
-        this.amount = amount;
-        this.price = price;
-    }
-
-
-    public BigDecimal getSubTotal() {
-    	return (price.subtract(new BigDecimal(discount))).multiply(new BigDecimal(amount)); 
-    }
-    
-    @JsonIgnore
-    public RequestSale getRequestSale() {
-        return id.getRequestSale();
-    }
-    
-    public void setRequestSale(RequestSale requestSale) {
-    	id.setRequestSale(requestSale);
-    }
-
-    public Product getProduct() {
-        return id.getProduct();
-    }
-    public void setProduct(Product product) {
+	public ItemRequestSale(RequestSale requestSale, Product product, Double discount, Integer amount,
+			BigDecimal price) {
+		id.setRequestSale(requestSale);
 		id.setProduct(product);
-    }
+		this.discount = discount;
+		this.amount = amount;
+		this.price = price;
+	}
 
-    public ItemRequestSalePK getId() {
-        return id;
-    }
+	public BigDecimal getSubTotal() {
+		return (price.subtract(new BigDecimal(discount))).multiply(new BigDecimal(amount));
+	}
 
-    public void setId(ItemRequestSalePK id) {
-        this.id = id;
-    }
+	@JsonIgnore
+	public RequestSale getRequestSale() {
+		return id.getRequestSale();
+	}
 
-    public Double getDiscount() {
-        return discount;
-    }
+	public void setRequestSale(RequestSale requestSale) {
+		id.setRequestSale(requestSale);
+	}
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
+	public Product getProduct() {
+		return id.getProduct();
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public void setProduct(Product product) {
+		id.setProduct(product);
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public ItemRequestSalePK getId() {
+		return id;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public void setId(ItemRequestSalePK id) {
+		this.id = id;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public Double getDiscount() {
+		return discount;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ItemRequestSale other = (ItemRequestSale) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 29 * hash + Objects.hashCode(this.id);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final ItemRequestSale other = (ItemRequestSale) obj;
+		if (!Objects.equals(this.id, other.id)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduct().getDescription());
+		builder.append(", QTD: ");
+		builder.append(getAmount());
+		builder.append(", preço unitário: ");
+		builder.append(nf.format(getPrice()));
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
+	}
+
 }

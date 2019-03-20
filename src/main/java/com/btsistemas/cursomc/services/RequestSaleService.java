@@ -25,11 +25,14 @@ public class RequestSaleService {
 	private ItemRequestSaleRepository itemRequestSaleRepository;
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private ClientService clientService;
 
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private TicketService ticketService;
+	
 
 	public RequestSale find(Integer id) {
 		Optional<RequestSale> obj = repo.findById(id);
@@ -42,6 +45,7 @@ public class RequestSaleService {
 	public RequestSale insert(RequestSale obj) {
 		obj.setId(null);
 		obj.setInstant(new Date());
+		obj.setClient(clientService.find(obj.getClient().getId()));
 		obj.getPayment().setStatus(PaymentStatus.PENDENTE);
 		obj.getPayment().setRequestSale(obj);
 		if (obj.getPayment() instanceof PaymentWithTicket) {
@@ -52,10 +56,12 @@ public class RequestSaleService {
 		paymentRepository.save(obj.getPayment());
 		for (ItemRequestSale irs : obj.getItems()) {
 			irs.setDiscount(0.0);
-			irs.setPrice(productService.find(irs.getProduct().getId()).getPrice());
+			irs.setProduct(productService.find(irs.getProduct().getId()));
+			irs.setPrice(irs.getProduct().getPrice());
 			irs.setRequestSale(obj);
 		}
 		itemRequestSaleRepository.saveAll(obj.getItems());
+		System.out.println(obj);
 		return obj;
 	}
 
