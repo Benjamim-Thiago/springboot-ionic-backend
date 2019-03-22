@@ -32,7 +32,8 @@ public class RequestSaleService {
 	private ProductService productService;
 	@Autowired
 	private TicketService ticketService;
-	
+	@Autowired
+	private EmailService emailService; 
 
 	public RequestSale find(Integer id) {
 		Optional<RequestSale> obj = repo.findById(id);
@@ -61,7 +62,7 @@ public class RequestSaleService {
 			irs.setRequestSale(obj);
 		}
 		itemRequestSaleRepository.saveAll(obj.getItems());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 
