@@ -159,10 +159,10 @@ public class DBService {
 		RequestSale requestSale1 = new RequestSale(null, date.parse("14/05/2018 22:20"), cli1, address1);
 		RequestSale requestSale2 = new RequestSale(null, date.parse("14/05/2018 01:09"), cli1, address2);
 
-		Payment pg1 = new PaymentWithCard(null, PaymentStatus.QUITADO, requestSale1, 6);
+		Payment pg1 = new PaymentWithCard(null, PaymentStatus.SETTLED, requestSale1, 6);
 		requestSale1.setPayment(pg1);
 
-		Payment pg2 = new PaymentWithTicket(null, PaymentStatus.PENDENTE, requestSale2, date.parse("18/06/2018 00:00"),
+		Payment pg2 = new PaymentWithTicket(null, PaymentStatus.PENDING, requestSale2, date.parse("18/06/2018 00:00"),
 				null);
 		requestSale2.setPayment(pg2);
 

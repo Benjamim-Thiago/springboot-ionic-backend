@@ -47,7 +47,7 @@ public class RequestSaleService {
 		obj.setId(null);
 		obj.setInstant(new Date());
 		obj.setClient(clientService.find(obj.getClient().getId()));
-		obj.getPayment().setStatus(PaymentStatus.PENDENTE);
+		obj.getPayment().setStatus(PaymentStatus.PENDING);
 		obj.getPayment().setRequestSale(obj);
 		if (obj.getPayment() instanceof PaymentWithTicket) {
 			PaymentWithTicket paymentWithTicket = (PaymentWithTicket) obj.getPayment();
@@ -62,7 +62,7 @@ public class RequestSaleService {
 			irs.setRequestSale(obj);
 		}
 		itemRequestSaleRepository.saveAll(obj.getItems());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 
