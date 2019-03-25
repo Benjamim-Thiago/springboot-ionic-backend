@@ -22,6 +22,9 @@ public class ClientNewDTO implements Serializable {
 	@NotEmpty(message = "Preencimento obrigatorio.")
 	@Email(message = "E-mail inválido.")
 	private String email;
+	
+	@NotEmpty(message = "Preencimento obrigatorio.")	
+	private String password;
 		
 	@NotEmpty(message = "Preencimento obrigatorio.")
 	private String document;
@@ -65,6 +68,14 @@ public class ClientNewDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getDocument() {

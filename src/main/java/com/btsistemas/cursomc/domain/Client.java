@@ -32,10 +32,13 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
 	private String document;
 	private Integer typeClient;
+	
+	@JsonIgnore
+	private String password;
 
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<Address> addresses = new ArrayList<>();
@@ -51,12 +54,13 @@ public class Client implements Serializable {
 	public Client() {
 	}
 
-	public Client(Integer id, String name, String email, String document, TypeClient typeClient) {
+	public Client(Integer id, String name, String email, String document, TypeClient typeClient, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.document = document;
 		this.typeClient = (typeClient) == null ? null : typeClient.getCode();
+		this.password = password;
 	}
 
 	public Integer getId() {
@@ -97,6 +101,14 @@ public class Client implements Serializable {
 
 	public void setTypeClient(TypeClient typeClient) {
 		this.typeClient = typeClient.getCode();
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<Address> getAddresses() {
