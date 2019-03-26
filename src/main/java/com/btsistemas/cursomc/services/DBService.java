@@ -21,6 +21,7 @@ import com.btsistemas.cursomc.domain.Product;
 import com.btsistemas.cursomc.domain.RequestSale;
 import com.btsistemas.cursomc.domain.State;
 import com.btsistemas.cursomc.domain.enums.PaymentStatus;
+import com.btsistemas.cursomc.domain.enums.Profile;
 import com.btsistemas.cursomc.domain.enums.TypeClient;
 import com.btsistemas.cursomc.repositories.AddressRepository;
 import com.btsistemas.cursomc.repositories.CategoryRepository;
@@ -129,8 +130,9 @@ public class DBService {
 		cityRepository.saveAll(Arrays.asList(city1, city2, city3, city4, city5));
 
 		// Client & Phones & Address
-		Client cli1 = new Client(null, "Carolina Alana Sônia Monteiro", "bebenjamimthiago@gmail.com",
+		Client cli1 = new Client(null, "Benjamim", "bebenjamimthiago@gmail.com",
 				"36180027692", TypeClient.PESSOA_FISICA,pe.encode("123456"));
+		cli1.addProfile(Profile.ADMIN);
 
 		cli1.getPhones().addAll(Arrays.asList("9225163444", "92981905512"));
 

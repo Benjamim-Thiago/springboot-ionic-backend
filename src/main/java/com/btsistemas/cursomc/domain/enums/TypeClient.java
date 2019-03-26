@@ -43,6 +43,6 @@ public enum TypeClient {
             }
         }
 
-        throw new IllegalArgumentException("Código tipo pessoa inválido: " + code);
+        throw new IllegalArgumentException("Código do tipo de pessoa inválido: " + code);
     }
 }

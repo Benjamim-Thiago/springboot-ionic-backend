@@ -9,15 +9,14 @@ package com.btsistemas.cursomc.domain.enums;
  *
  * @author ben
  */
-public enum PaymentStatus {
-	PENDING(1, "Pendente"),
-	SETTLED(2, "Quitado"),
-    CANCELED(3, "Cancelado");
+public enum Profile {
+    ADMIN(1, "ROLE_ADMIN"),
+    CLIENT(2, "ROLE_CLIENTE");
 
     private int code;
     private String description;
 
-    private PaymentStatus(int code, String description) {
+    private Profile(int code, String description) {
         this.code = code;
         this.description = description;
     }
@@ -30,18 +29,20 @@ public enum PaymentStatus {
         return description;
     }
 
-    public static PaymentStatus toEnum(Integer code) {
+    
+
+    public static Profile toEnum(Integer code) {
 
         if (code == null) {
             return null;
         }
 
-        for (PaymentStatus x : PaymentStatus.values()) {
+        for (Profile x : Profile.values()) {
             if (code.equals(x.getCode())) {
                 return x;
             }
         }
 
-        throw new IllegalArgumentException("Código do tipo de pagamento inválido: " + code);
+        throw new IllegalArgumentException("Código do tipo de perfil inválido: " + code);
     }
 }

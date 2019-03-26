@@ -1,23 +1,27 @@
 package com.btsistemas.cursomc.domain;
 
-import com.btsistemas.cursomc.domain.enums.TypeClient;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.btsistemas.cursomc.domain.enums.Profile;
+import com.btsistemas.cursomc.domain.enums.TypeClient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -36,7 +40,7 @@ public class Client implements Serializable {
 	private String email;
 	private String document;
 	private Integer typeClient;
-	
+
 	@JsonIgnore
 	private String password;
 
@@ -47,11 +51,16 @@ public class Client implements Serializable {
 	@CollectionTable(name = "phones")
 	private Set<String> phones = new HashSet<>();
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "profiles")
+	private Set<Integer> profiles = new HashSet<>();
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<RequestSale> requestSales = new ArrayList<>();
 
 	public Client() {
+		addProfile(Profile.CLIENT);
 	}
 
 	public Client(Integer id, String name, String email, String document, TypeClient typeClient, String password) {
@@ -61,6 +70,7 @@ public class Client implements Serializable {
 		this.document = document;
 		this.typeClient = (typeClient) == null ? null : typeClient.getCode();
 		this.password = password;
+		addProfile(Profile.CLIENT);
 	}
 
 	public Integer getId() {
@@ -109,6 +119,14 @@ public class Client implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Profile> getProfiles() {
+		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addProfile(Profile profile) {
+		profiles.add(profile.getCode());
 	}
 
 	public List<Address> getAddresses() {
